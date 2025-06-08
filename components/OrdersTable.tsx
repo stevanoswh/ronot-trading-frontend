@@ -9,7 +9,19 @@ async function getOrders() {
 }
 
 export default function OrdersTable() {
-  const { data, error, isLoading } = useSWR('orders', getOrders); // ← hapus suspense
+
+    type Order = {
+  symbol: string;
+  action: string;
+  price_entry: number;
+  tp_price: number;
+  sl_price: number;
+  leverage: string;
+  timeframe: string;
+  timestamp: string;
+};
+
+    const { data, error, isLoading } = useSWR<Order[]>('orders', getOrders, { suspense: true });
 
   if (isLoading) return <p>Loading orders…</p>;
   if (error)     return <p className="text-red-500">Error loading orders</p>;
@@ -26,6 +38,7 @@ export default function OrdersTable() {
           </tr>
         </thead>
         <tbody>
+            
           {data.map((o: any, i: number) => (
             <tr key={i} className="odd:bg-gray-50 dark:odd:bg-gray-900">
               <td className="px-2 py-1">{new Date(o.timestamp).toLocaleString()}</td>

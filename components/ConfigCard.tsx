@@ -1,12 +1,23 @@
-'use client';                    // ① jadikan Client Component
+'use client';
 
 import useSWR from 'swr';
 import { getConfig } from '@/lib/api';
 
-export default function ConfigCard({ initial }) {   
-  const { data } = useSWR('config', getConfig, {
+type Config = {
+  symbol: string;
+  timeframe: string;
+  plusDIThreshold: number;
+  minusDIThreshold: number;
+  adxMinimum: number;
+  takeProfitPercent: number;
+  stopLossPercent: number;
+  leverage: number;
+};
+
+export default function ConfigCard({ initial }: { initial: Config }) {
+  const { data } = useSWR<Config>('config', getConfig, {
     suspense: true,
-    fallbackData: initial            
+    fallbackData: initial
   });
 
   return (

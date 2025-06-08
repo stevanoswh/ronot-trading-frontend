@@ -39,7 +39,7 @@ export default function OrdersTable() {
         </thead>
         <tbody>
             
-          {data.map((o: any, i: number) => (
+          {data.map((o: Order, i: number) => (
             <tr key={i} className="odd:bg-gray-50 dark:odd:bg-gray-900">
               <td className="px-2 py-1">{new Date(o.timestamp).toLocaleString()}</td>
               <td className="px-2 py-1">{o.symbol}</td>

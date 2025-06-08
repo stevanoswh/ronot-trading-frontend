@@ -3,10 +3,10 @@
 import useSWR from 'swr';
 import { getConfig } from '@/lib/api';
 
-export default function ConfigCard({ initial }) {   // ② terima data awal
+export default function ConfigCard({ initial }) {   
   const { data } = useSWR('config', getConfig, {
     suspense: true,
-    fallbackData: initial            // ③ cegah suspend di SSR
+    fallbackData: initial            
   });
 
   return (

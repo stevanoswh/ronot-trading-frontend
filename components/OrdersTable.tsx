@@ -21,7 +21,7 @@ export default function OrdersTable() {
   timestamp: string;
 };
 
-    const { data, error, isLoading } = useSWR<Order[]>('orders', getOrders, { suspense: true });
+    const { data, error, isLoading } = useSWR<Order[]>('orders', getOrders);
 
   if (isLoading) return <p>Loading orders…</p>;
   if (error)     return <p className="text-red-500">Error loading orders</p>;
